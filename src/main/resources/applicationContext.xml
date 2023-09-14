@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--빈 객체를 생성, 초기화-->
+    <!--Greeter greeter = new Greeter()-->
+    <bean id="greeter" class="sample.Greeter">
+        <!--greeter.setFormat("%s, 안녕하세요!")-->
+        <property name="format" value="%s, 안녕하세요!"/>
+    </bean>
+    <bean id="greeter2" class="sample.Greeter">
+        <!--greeter.setFormat("%s, 안녕하세요!")-->
+        <property name="format" value="Hello %s!"/>
+    </bean>
+
+    <bean id="memberDao" class="sample.MemberDao">
+    </bean>
+    <bean id="memberRegSvc" class="sample.MemberRegisterService">
+        <!--생성자로 의존 객체를 주입-->
+        <constructor-arg ref="memberDao"/>
+    </bean>
+    <bean id="changePwdSvc" class="sample.ChangePasswordService">
+        <constructor-arg ref="memberDao"/>
+    </bean>
+
+</beans>
