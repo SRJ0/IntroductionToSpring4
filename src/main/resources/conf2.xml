@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <import resource="classpath:conf1.xml"/>
+
+    <!--1. 생성자로 의존 객체를 주입 / 빈 객체를 생성하는 시점에 모든 의존 객체가 주입되어 완전한 상태로 이용할 수 있다. / 파라미터가 여러개인 경우 어떤 객체를 주입하는 지 알려면 생성자를 봐야한다.? -->
+    <bean id="memberRegSvc" class="sample.MemberRegisterService">
+        <constructor-arg ref="memberDao"/>
+    </bean>
+    <!--두 개 이상의 의존 객체를 주입-->
+    <bean id="listPrinter" class="sample.MemberListPrinter">
+        <constructor-arg ref="memberDao"/>
+        <constructor-arg ref="memberPrinter"/>
+    </bean>
+    <bean id="changePwdSvc" class="sample.ChangePasswordService">
+        <constructor-arg ref="memberDao"/>
+    </bean>
+    <!--2. 설정 메서드로 의존 객체를 주입 / name 속성만으로 어떤 객체를 주입하는지 유추할 수 있다. ? / property 태그 없어도 빈 생성되므로 사용시 npe 발생가능 -->
+    <bean id="infoPrinter" class="sample.MemberInfoPrinter">
+        <property name="memberDao" ref="memberDao"/> <!--setMemberDao 메서드를 이용해서 memberDao 객체를 주입-->
+        <property name="printer" ref="memberPrinter"/>
+    </bean>
+
+    <!--value property 설정 타입변환은 알아서 해준다 (PropertyEditor, ConversionService)-->
+    <bean id="versionPrinter" class="sample.VersionPrinter">
+        <property name="majorVersion" value="4"/>
+        <property name="minorVersion">
+            <value>1</value>
+        </property>
+    </bean>
+
+</beans>

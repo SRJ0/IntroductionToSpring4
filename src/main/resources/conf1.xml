@@ -2,6 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--자바빈즈 규약상 bean은 재사용 가능한 객체를 의미한다 property는 빈이 관리하는 데이터이다.-->
     <!--빈 객체를 생성, 초기화-->
     <!--Greeter greeter = new Greeter()-->
     <bean id="greeter" class="sample.Greeter">
@@ -13,14 +14,6 @@
         <property name="format" value="Hello %s!"/>
     </bean>
 
-    <bean id="memberDao" class="sample.MemberDao">
-    </bean>
-    <bean id="memberRegSvc" class="sample.MemberRegisterService">
-        <!--생성자로 의존 객체를 주입-->
-        <constructor-arg ref="memberDao"/>
-    </bean>
-    <bean id="changePwdSvc" class="sample.ChangePasswordService">
-        <constructor-arg ref="memberDao"/>
-    </bean>
-
+    <bean id="memberDao" class="sample.MemberDao"/>
+    <bean id="memberPrinter" class="sample.MemberPrinter"/>
 </beans>
