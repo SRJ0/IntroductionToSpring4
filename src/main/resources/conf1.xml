@@ -15,5 +15,8 @@
     </bean>
 
     <bean id="memberDao" class="sample.MemberDao"/>
-    <bean id="memberPrinter" class="sample.MemberPrinter"/>
+<!--    <bean id="memberPrinter" class="sample.MemberPrinter"/>-->
+    <bean id="memberPrinter" class="sample.MemberPrinter">
+        <qualifier value="p2"/>
+    </bean>
 </beans>

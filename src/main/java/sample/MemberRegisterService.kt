@@ -1,6 +1,16 @@
 package sample
 
-class MemberRegisterService(private val memberDao: MemberDao) {
+import org.springframework.beans.factory.annotation.Autowired
+
+//Autowired의 required 속성을 false로 설정할 경우 객체가 존재하지 않더라도 exception이 발생하지 않는다.
+//한편, 이 경우에는 빈 생성자가 있어야 MemberRegisterService 객체를 생성할 때 exception이 발생하는 것을 막을 수 있다.
+class MemberRegisterService() {
+    private lateinit var memberDao: MemberDao
+    @Autowired(required = false)
+    constructor(memberDao: MemberDao) : this() {
+        this.memberDao = memberDao
+    }
+
     fun regist(req: RegisterRequest) {
         val member = memberDao.selectByLoginId(req.loginId)
         if (member != null) {
@@ -12,23 +22,3 @@ class MemberRegisterService(private val memberDao: MemberDao) {
         memberDao.insert(newMember)
     }
 }
-
-// IN JAVA
-//public class MemberRegisterService {
-//    private MemberDao memberDao;
-//
-//    public MemberRegisterService(MemberDao memberDao) {
-//        this.memberDao = memberDao;
-//    }
-//
-//    public void regist(RegisterRequest req) {
-//        Member member = memberDao.selectByLoginId(req.getLoginId());
-//        if (member != null) {
-//            throw new AlreadyExistingMemberException("dup loginid" + req.getLoginId());
-//        }
-//        Member newMember = new Member(
-//            req.getLoginId(), req.getPassword()
-//        );
-//        memberDao.insert(newMember);
-//    }
-//}

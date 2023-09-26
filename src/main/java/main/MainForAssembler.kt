@@ -14,8 +14,9 @@ object MainForAssembler {
     @Throws(IOException::class)
     @JvmStatic
     fun main(args: Array<String>) {
-//        String[] conf = {"classpath:conf1.xml", "classpath:conf2.xml"}; 여러 개의 설정 파일을 포함할 경우는 스트링 배열을 이용
-        ctx = GenericXmlApplicationContext("classpath:conf2.xml")
+
+        ctx = GenericXmlApplicationContext("classpath:conf2.xml") // 여러 개의 설정 파일을 포함할 경우는 스트링 배열을 파라미터로 넘겨준다.
+        //String[] conf = {"classpath:conf1.xml", "classpath:conf2.xml"};
         val br = BufferedReader(InputStreamReader(System.`in`))
         while (true) {
             print("$ ")
