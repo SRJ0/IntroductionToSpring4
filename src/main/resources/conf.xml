@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--초기화, 소멸 인터페이스를 구현할 수 없거나 사용하지 않을 경우 직접 메서드를 지정해준다.-->
+    <bean id="client" class="sample.Client"
+          init-method="connect" destroy-method="close">
+    <!--afterPropertiesSet() destroy() 보다는 늦게 실행된다-->
+    <!--설정클래스에서는 @Bean(initMethod = "", destoryMethod = "")와 같이 지정-->
+        <property name="host" value="서버"/>
+    </bean>
+</beans>
