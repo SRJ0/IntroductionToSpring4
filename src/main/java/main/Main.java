@@ -18,8 +18,10 @@ public class Main {
         //2. 컨테이너 사용
         Client g = gctx.getBean("client", Client.class); //context가 생성한 빈 객체를 id와 타입으로 검색한다
         g.send();
-//        Greeter g2 = gctx.getBean("client", Client.class);
-//        System.out.println(g == g2); //는 트루 싱글톤이 디폴트, 하나의 빈에 하나의 객체를 생성한다
+//      싱글톤이 디폴트이므로 하나의 빈에 하나의 객체를 생성하고 따라서 g == g2이다
+//      단, 빈의 scope를 prototype으로 지정하면 매번 새로운 객체가 생성되어 g != g2이다.
+        Client g2 = gctx.getBean("client", Client.class);
+        System.out.println("scope : " + (g == g2 ? "singleton" : "prototype"));
 
         //DI dependency injection 의존성 주입 : 한 클래스가 다른 클래스의 메서드를 실행할 때
         //실행되는 메서드가 변경되면 실행하는 클래스에 영향을 미치므로 실행하는 클래스는 실행되는 클래스에 의존한다.
