@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="execTimeAspect" class="aspect.ExecTimeAspect"/>
+    <bean id="cacheAspect" class="aspect.CacheAspect"/>
+
+    <aop:config>
+        <aop:aspect id="measureAspect" ref="execTimeAspect" order="0">
+            <aop:pointcut id="publicMethod"
+                          expression="execution(public * aop..*(..))"
+            />
+            <aop:around pointcut-ref="publicMethod" method="measure"/>
+        </aop:aspect>
+    </aop:config>
+
+    <aop:config>
+        <aop:aspect id="calculatorCache" ref="cacheAspect" order="1">
+            <aop:pointcut id="calculatorMethod"
+                          expression="execution(public * aop.Calculator.*(..))"
+            />
+            <aop:around pointcut-ref="calculatorMethod" method="execute"/>
+        </aop:aspect>
+    </aop:config>
+
+
+</beans>

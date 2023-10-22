@@ -13,6 +13,11 @@ import java.util.*
 class ExecTimeAspect2 {
 
     @Pointcut("execution(public * aop..*(..))")
+    //execution 명시자는 advice를 적용할 메서드를 지정할 때 사용
+    // 수식어 public(스프링AOP는 public only) / 리턴타입 *(모든값) / 패키지 클래스 이름 메서드 이름 aop 패키지 및 하위 패키지 / (파라미터 ..(0개 이상))
+    // public void set*(..) 이름이 set으로 시작하고 파라미터가 0개 이상인 메서드 호출
+    // package.*.*() package 패키지의 타입에 속한 파라미터가 없는 모든 메서드 호출
+
     private fun publicTarget() {
     }
 

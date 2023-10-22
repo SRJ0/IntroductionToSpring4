@@ -11,13 +11,13 @@
     <!--공통 기능을 제공할 클래스를 빈으로 등록-->
 <!--    <bean id="execTimeAspect" class="aspect.ExecTimeAspect"/>-->
 <!--    <aop:config>-->
-<!--        &lt;!&ndash;Aspect 빈 설정&ndash;&gt;-->
+        <!--Aspect 빈 설정-->
 <!--        <aop:aspect id="measureAspect" ref="execTimeAspect">-->
-<!--            &lt;!&ndash;publicMethod라는 id의 pointcut 설정, 범위는 aop패키지와 그 하위에 있는 모든 public 메서드&ndash;&gt;-->
+            <!--publicMethod라는 id의 pointcut 설정, 범위는 aop패키지와 그 하위에 있는 모든 public 메서드-->
 <!--            <aop:pointcut id="publicMethod"-->
 <!--                          expression="execution(public * aop..*(..))"-->
 <!--            />-->
-<!--            &lt;!&ndash;위에서 정의한 publicMethod pointcut에 공통 기능인 measure()를 적용하는 Around advice를 정의&ndash;&gt;-->
+            <!--위에서 정의한 publicMethod pointcut에 공통 기능인 measure()를 적용하는 Around advice를 정의-->
 <!--            <aop:around pointcut-ref="publicMethod" method="measure"/>-->
 <!--        </aop:aspect>-->
 <!--    </aop:config>-->
